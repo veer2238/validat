@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        background-color: aqua;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main {
+        height: 400px;
+        width: 600px;
+        box-shadow: 1px 2px 1px 1px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    input {
+        padding: 10px;
+
+    }
+</style>
+
+<body>
+
+    <div class="main">
+        <h1>
+            Login
+        </h1>
+
+        <form>
+
+            <input type="text" placeholder="email" id="username" onkeyup="white()"><br><br>
+
+            <input type="text" placeholder="password" id="password" onkeyup="black()"><br><br>
+
+            <error id="alert" style="color: red;"></error><br><br>
+
+            <button onclick="return validateForm()">submit</button>
+
+
+        </form>
+
+    </div>
+
+</body>
+
+<script>
+
+
+    var patten = /\s/g;
+    var patten2 = "@";
+    var alertp = document.getElementById('alert');
+
+    function white() {
+
+        var user = document.getElementById("username").value
+
+
+
+        if(user.match(patten)){
+            alertp.innerHTML="**White Space Are not allowed in E-mail"
+            return false;
+        }
+        if(user.length == 0){
+            alertp.innerHTML="**please fill E-mail id";
+            return false;
+        }
+         
+        if((user.length < 8) || (user.length >25)){
+            alertp.innerHTML="*length should be between 8 and 25";
+            return false;
+          }
+        
+        if(user.indexOf('@') == 0){
+            alertp.innerHTML="** email id is not Ok";
+            return false;
+        }
+        if((user.charAt(user.length-4)!=='.') && (user.charAt(user.length-3)!=='.')){
+            alertp.innerHTML="*email Id is not valid";
+            return false;
+          }
+
+          if(!user.match(patten2) ){
+            alertp.innerHTML="*@ is important";
+            return false;
+          }
+        
+    
+
+        alertp.innerHTML="";
+        return true;
+    }
+
+    function black() {
+
+        var pass = document.getElementById("password").value
+
+
+       
+        if(pass.match(patten)){
+            alertp.innerHTML="**White Space Are not allowed in Password"
+            return false;
+        }
+
+        if(pass==""){
+            alertp.innerHTML="** Please Fill The Password";
+            return false;
+        }
+       
+        if((pass.length < 8)||(pass.length > 15)){
+            alertp.innerHTML="*password should have Atleast 8 Character";
+            return false;
+        }   
+
+        alertp.innerHTML="";
+        return true;
+    }
+
+
+    function validateForm() {
+        if (!white() || !black()) {
+            alertp.innerHTML = "*please fill all details"
+            return false;
+        }
+
+    }
+
+</script>
+
+</html>
